@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { IoCartOutline } from "react-icons/io5";
 import ClientCard from "../../components/ClientCard"
 
-export default function commandePage() {
+export default function ClientPage() {
     interface Client {
         id: number
         name: string

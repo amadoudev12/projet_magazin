@@ -9,9 +9,9 @@ import { useEffect } from "react";
 import Link from "next/link";
 
 export default function Home() {
-  const {data:session, status} = useSession()
+  const { status} = useSession()
   const router = useRouter()
-  const isAuthenticated = status === "authenticated";
+  // const isAuthenticated = status === "authenticated";
     useEffect(() => {
       if (status === "unauthenticated") {
         router.push("/client/login");

@@ -1,7 +1,6 @@
 "use client"
 import { signIn, useSession} from "next-auth/react"
 import { useEffect, useState } from "react"
-import { FaGoogle } from "react-icons/fa"
 import { useRouter } from "next/navigation"
 
 
@@ -29,7 +28,7 @@ export default function LoginPage () {
             router.push('/client/product')
         }
     }, [session, router])
-    const userAdd = async (e:any)=>{
+    const userAdd = async (e:React.FormEvent<HTMLFormElement>)=>{
         e.preventDefault()
         const res = await fetch('/api/client',{
             method:"POST",

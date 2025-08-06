@@ -44,13 +44,17 @@ export default function ProduitPage() {
         })
         const data = await res.json()
         if (res.ok) {
-            alert(data.message)
+            // alert(data.message)
+            toast.success('Produit supprimé avec succes')
             setProduits((prev) => prev.filter(p => p.id !== id))
+        }
+        if(!res.ok){
+            toast.error('erreur lors de la suppression, veuillez essayer encore')
         }
     }
 
     // Soumission du formulaire d'édition
-    const handleEditForm = async (e: any) => {
+    const handleEditForm = async (e:React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
         if (!selectedId) return
 
@@ -67,7 +71,9 @@ export default function ProduitPage() {
 
         const data = await res.json()
         if (res.ok) {
-            alert(data.message)
+            // j'aime le code 
+            // alert(data.message)
+            toast.success('produit modifié')
             setProduits((prev) =>
                 prev.map(p =>
                     p.id === selectedId ? { ...p, name: newNameProduct, description: newDesc, price: newPrice } : p

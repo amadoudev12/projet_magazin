@@ -1,11 +1,11 @@
 "use client"
 import { useState } from "react"
 import { useRouter } from "next/navigation"
-export default function Profilecompleted(){
+export default function ProfileCompleted(){
     const [telephone, setTelephone] =  useState('')
     const [lieu, setLieu] =  useState('')
     const router = useRouter()
-    const profileCompleted = async (e:any) =>{
+    const profileCompleted = async (e:React.FormEvent<HTMLFormElement>) =>{
         e.preventDefault()
         try{
             const res = await fetch('/api/client',{

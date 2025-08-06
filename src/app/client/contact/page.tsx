@@ -2,6 +2,6 @@
 import React from 'react'
 import Contact from '../../components/Contact'
 
-export default function pageContact() {
+export default function PageContact() {
     return <Contact />;
 }

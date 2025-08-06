@@ -1,10 +1,13 @@
 // app/api/commandes/route.ts
 import { NextRequest, NextResponse } from "next/server"
 import { getServerSession } from "next-auth"
-import { authOptions } from "@/app/api/auth/[...nextauth]/route"
+import { authOptions } from "../../../../lib/authoptions"
 import prisma from "../../../../lib/prisma"
-import { error } from "console"
-
+type OrderItem = {
+    id: number
+    quantity: number
+    price: number
+}
 export async function GET() {
     try{
     const AllCommandes = await prisma.order.findMany({
@@ -46,7 +49,7 @@ export async function POST(req: NextRequest) {
             userId: user.id,
             total,
             orderItems: { // <- correction ici
-            create: items.map((b: any) => ({
+            create: items.map((b: OrderItem) => ({
                 productId: b.id,
                 quantity: b.quantity,
                 price: b.price,

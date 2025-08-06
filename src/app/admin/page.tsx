@@ -1,6 +1,6 @@
 import { BsCart } from "react-icons/bs";
 import prisma from "../../../lib/prisma";
-export default async function adminPage(){
+export default async function AdminPage(){
     const nombreCommande = await prisma.order.count()
     const ChiffreAffaire = await prisma.order.aggregate({
         _sum:{
@@ -17,7 +17,7 @@ export default async function adminPage(){
             {/* Carte 1 */}
             <div className="border-2 border-gray-200 bg-white p-7 w-64 rounded-xl shadow-lg hover:shadow-2xl transition">
                 <div className="mb-3 flex gap-6 items-center">
-                <p className="text-gray-600 font-medium">Chiffres d'affaires</p>
+                <p className="text-gray-600 font-medium">Chiffres d&apos;affaires</p>
                 <p className="text-green-500 text-xl font-bold"></p>
                 </div>
                 <h2 className="font-bold text-3xl text-gray-800">{ChiffreAffaire._sum.total} FCFA</h2>

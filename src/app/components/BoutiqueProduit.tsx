@@ -7,6 +7,7 @@ import type { Product } from "@prisma/client";
 import toast from 'react-hot-toast';
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
+import Image from 'next/image';
 
 
 const BoutiqueProduit = ({ produits }: { produits: Product[] }) => {
@@ -29,7 +30,7 @@ const BoutiqueProduit = ({ produits }: { produits: Product[] }) => {
         setLoading(false);
     }, 3000);
     }
-    const addToCart = (id: number, count: number, price: number) => {
+    const addToCart = (id: number, count: number) => {
     setCart((prev) => {
         const existing = prev.find(p => p.id === id)
         
@@ -59,7 +60,6 @@ const BoutiqueProduit = ({ produits }: { produits: Product[] }) => {
     }
     useEffect(()=>{
         console.log(cart)
-        console.log(viewCart)
         const somme = cart.reduce((s,c)=> s + c.total, 0)
         setSomme(somme)
         console.log(somme)
@@ -110,11 +110,13 @@ return (
                 >
                 <div className="flex-1 flex flex-col justify-center">
                     {p.imageUrl && (
-                    <img
-                        src={p.imageUrl.startsWith('/') ? p.imageUrl : `/uploads/${p.imageUrl}`}
+                        <Image
+                        src={p.imageUrl.startsWith("/") ? p.imageUrl : `/uploads/${p.imageUrl}`}
                         alt={p.name}
-                        className="w-40 h-40 object-cover rounded-2xl mx-auto mb-4 group-hover:scale-105 transition-transform duration-300"
-                    />
+                        width={160} // équivalent à w-40
+                        height={160} // équivalent à h-40
+                        className="object-cover rounded-2xl mx-auto mb-4 group-hover:scale-105 transition-transform duration-300"
+                        />
                     )}
                     {!p.imageUrl && (
                     <div className="text-7xl mb-4 group-hover:scale-110 transition-transform duration-300">

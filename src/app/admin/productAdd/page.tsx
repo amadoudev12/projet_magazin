@@ -2,14 +2,14 @@
 
 import { useState } from "react"
 
-export default function productAdd() {
+export default function ProductAdd() {
     const [name, setProduitName] = useState("")
     const [description, setProduitdesc] = useState("")
     const [price, setProduitPrice] = useState("")
     const [imageFile, setImageFile] = useState<File | null>(null)
     // const router = useRouter()
 
-    const handleSubmit = async (event : any) => {
+    const handleSubmit = async (event : React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         const formData = new FormData();
         formData.append("name", name);
@@ -32,7 +32,7 @@ export default function productAdd() {
                 alert("Erreur lors de l'enregistrement");
             }
         } catch (error) {
-            alert("Erreur serveur");
+            alert("Erreur serveur:"+error);
         }
     }
     return (
