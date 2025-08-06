@@ -1,0 +1,49 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model order {
+  id        Int      @id @default(autoincrement())
+  userId    Int
+  total     Float
+  createdAt DateTime @default(now())
+  status    Boolean  @default(false)
+
+  @@index([userId], map: "Order_userId_fkey")
+}
+
+model orderitems {
+  id        Int   @id @default(autoincrement())
+  orderId   Int
+  productId Int
+  quantity  Int
+  price     Float
+
+  @@index([orderId], map: "OrderItems_orderId_fkey")
+  @@index([productId], map: "OrderItems_productId_fkey")
+}
+
+model product {
+  id          Int      @id @default(autoincrement())
+  name        String
+  description String?
+  price       Float
+  imageUrl    String?
+  createdAt   DateTime @default(now())
+}
+
+model user {
+  id             Int      @id @default(autoincrement())
+  name           String
+  prenom         String
+  createdAt      DateTime @default(now())
+  email          String   @unique(map: "User_email_key")
+  lieuLivraison  String
+  telephone      String
+  profilecomplet Boolean  @default(false)
+}
