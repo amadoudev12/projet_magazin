@@ -48,9 +48,13 @@ export default function LoginPage () {
                 await signIn("credentials", { email: email });
                 console.log(data.message);
                 router.push('/client/product');
-            } catch (erreur) {
-                console.error("Erreur front:", erreur);
-                console.log("Une erreur est survenue.");
+            }catch (err: unknown) {
+            if (err instanceof Error) {
+                console.error("Erreur front:", err.message);
+            } else {
+                console.error("Erreur front inconnue:", err);
+            }
+            console.log("Une erreur est survenue.");
             }
         };
 
