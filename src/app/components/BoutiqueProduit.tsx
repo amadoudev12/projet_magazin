@@ -3,14 +3,14 @@ import React, { useEffect } from 'react'
 import { ShoppingCart, Check, X, Loader2 } from 'lucide-react';
 import BtnCount from "../components/btnCount"
 import { useState } from "react";
-import type { Product } from "@prisma/client";
+import type { product } from "@prisma/client";
 import toast from 'react-hot-toast';
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 
 
-const BoutiqueProduit = ({ produits }: { produits: Product[] }) => {
+const BoutiqueProduit = ({ produits }: { produits: product[] }) => {
     const [sommeTotal, setSomme] = useState(0)
     const [cart, setCart ] = useState<{id:number, name:string, count:number, price:number , total:number}[]>([])
     const [loading, setLoading] = useState(false)
