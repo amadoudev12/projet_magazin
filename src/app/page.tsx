@@ -33,9 +33,9 @@ export default function Home() {
     );
     }
 
-    if (status === "unauthenticated") {
-      return null; // Évite de rendre la page avant la redirection
-    }
+    // if (status === "unauthenticated") {
+    //   return null; // Évite de rendre la page avant la redirection
+    // }
 
     return (
       <> 
