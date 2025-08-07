@@ -12,9 +12,9 @@ import Link from "next/link";
 export default function Home() {
   const { status} = useSession()
   const router = useRouter()
-  // const isAuthenticated = status === "authenticated";
+  const isAuthenticated = status === "authenticated";
     useEffect(() => {
-      if (status !== "unauthenticated") {
+      if (!isAuthenticated) {
         router.push("/client/login");
       }
     }, [status, router]);
