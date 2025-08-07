@@ -38,13 +38,14 @@ const Nav = () => {
     const {data:session , status} = useSession()
     
     const isAuthenticated = status === "authenticated";
+    const admin = session?.user?.role === "admin"
 
     return (
     <nav className="px-6 py-4 shadow-md bg-white w-full fixed top-0 left-0 z-50">
         <div className="flex justify-between items-center max-w-7xl mx-auto">
             
             {/* Logo */}
-            <h1 className="text-2xl font-extrabold text-orange-600 tracking-wide">MonLogo</h1>
+            <h1 className="text-2xl font-extrabold text-orange-600 tracking-wide">Daloa ~ Kalifa</h1>
 
             {/* Desktop Menu */}
             <ul className="hidden md:flex items-center gap-10">
@@ -68,14 +69,26 @@ const Nav = () => {
 
             {/* Panier */}
             {isAuthenticated && (
-                <div className="mt-2 flex justify-end pr-6">
+                <div className="mt-4 flex justify-end pr-6 space-x-3">
+                {/* Bouton Déconnexion */}
                 <button
                     onClick={() => signOut()}
-                    className="text-sm text-white px-5 py-3 rounded-4xl hover:bg-red-700 cursor-pointer font-medium bg-orange-600 transition"
+                    className="px-5 py-2 rounded-full bg-gradient-to-r from-orange-500 to-red-600 text-white font-medium shadow-md hover:shadow-lg hover:scale-105 transform transition-all duration-300"
                 >
                     Déconnexion
                 </button>
+
+                {/* Lien Admin visible seulement pour l'admin */}
+                {admin && (
+                    <Link
+                    href="/admin"
+                    className="px-5 py-2 rounded-full bg-gradient-to-r from-indigo-500 to-purple-600 text-white font-medium shadow-md hover:shadow-lg hover:scale-105 transform transition-all duration-300"
+                    >
+                    Tableau de bord
+                    </Link>
+                )}
                 </div>
+
             )}
             {/* Menu Mobile Icon */}
             <div

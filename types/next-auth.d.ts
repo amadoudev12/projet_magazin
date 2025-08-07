@@ -15,6 +15,7 @@ declare module "next-auth" {
         image?: string | null;
         telephone? :  String | null;
         lieuLivraison? : String | null;
+        role? : String | null;
         };
     }
 
@@ -30,5 +31,6 @@ declare module "next-auth" {
         name?: string | null;
         telephone? :  String | null;
         lieuLivraison? : String | null;
+        role? : String | null;
     }
 }

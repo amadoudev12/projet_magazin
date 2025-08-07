@@ -1,5 +1,6 @@
 import { BsCart } from "react-icons/bs";
 import prisma from "../../../lib/prisma";
+import DashBoardCart from "../components/DashBoardCart"
 export default async function AdminPage(){
     const nombreCommande = await prisma.order.count()
     const ChiffreAffaire = await prisma.order.aggregate({
@@ -7,6 +8,7 @@ export default async function AdminPage(){
             total:true
         }
     })
+    const nombreClient = await prisma.user.count()
     return (
         <div>
             <div className="flex flex-col justify-center mb-4">
@@ -31,8 +33,15 @@ export default async function AdminPage(){
                 </div>
                 <h2 className="font-bold text-3xl text-gray-800">{nombreCommande}</h2>
             </div>
+            <div className="border-2 border-gray-200 bg-white p-7 w-64 rounded-xl shadow-lg hover:shadow-2xl transition">
+                <div className="mb-3 flex gap-6 items-center">
+                <p className="text-gray-600 font-medium">Clients</p>
+                <BsCart className="text-blue-500 text-xl font-bold"/>
+                </div>
+                <h2 className="font-bold text-3xl text-gray-800">{nombreClient}</h2>
+            </div>
         </div>
-
+        <DashBoardCart/>
         </div>
     )
 }

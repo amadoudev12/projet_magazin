@@ -29,10 +29,7 @@ export default function CommandePage() {
 
     useEffect(()=>{
         const GetOrders = async ()=>{
-            const res = await fetch('/api/commande',{
-                method:"GET",
-                headers:{"Content-Type":"application/json"}
-            })
+            const res = await fetch('/api/commande')
             const data = await res.json()
             if(res.ok){
                 setCommandes(data)

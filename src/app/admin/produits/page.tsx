@@ -42,7 +42,7 @@ export default function ProduitPage() {
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ id })
         })
-        const data = await res.json()
+        // const data = await res.json()
         if (res.ok) {
             // alert(data.message)
             toast.success('Produit supprimé avec succes')
@@ -69,7 +69,7 @@ export default function ProduitPage() {
             })
         })
 
-        const data = await res.json()
+        // const data = await res.json()
         if (res.ok) {
             // j'aime le code 
             // alert(data.message)

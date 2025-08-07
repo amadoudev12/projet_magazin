@@ -68,21 +68,26 @@ export const authOptions: AuthOptions = {
         },
 
         async jwt({ token }) {
-        if (!token.email) return token
+            if (!token.email) return token
 
-        const dbUser = await prisma.user.findUnique({
-            where: { email: token.email },
-        })
+            const dbUser = await prisma.user.findUnique({
+                where: { email: token.email },
+            })
+            if(dbUser?.email === process.env.ADMIN_EMAIL){
+                token.role = "admin"
+            }else{
+                token.role = "user"
+            }
 
-        if (dbUser) {
-            token.id = dbUser.id
-            token.name = dbUser.name
-            token.prenom = dbUser.prenom
-            token.telephone = dbUser.telephone
-            token.lieuLivraison = dbUser.lieuLivraison
-        }
+            if (dbUser) {
+                token.id = dbUser.id
+                token.name = dbUser.name
+                token.prenom = dbUser.prenom
+                token.telephone = dbUser.telephone
+                token.lieuLivraison = dbUser.lieuLivraison
+            }
 
-        return token
+            return token
         },
 
         async session({ session, token }) {
@@ -93,6 +98,7 @@ export const authOptions: AuthOptions = {
             session.user.email = token.email as string
             session.user.telephone = token.telephone as string
             session.user.lieuLivraison = token.lieuLivraison as string
+            session.user.role = token.role as string
         }
         return session
         },
