@@ -8,7 +8,7 @@ import BoutiqueProduit from "../../components/BoutiqueProduit";
 
 export default async function BoutiquePage() {
     
-    const produits : Product[] = await prisma.Product.findMany();
+    const produits : Product[] = await prisma.product.findMany();
     // typer produits 
     return (
         <div>

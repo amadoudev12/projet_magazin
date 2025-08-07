@@ -3,8 +3,22 @@ generator client {
 }
 
 datasource db {
-  provider = "mysql"
+  provider = "postgresql"  
   url      = env("DATABASE_URL")
+}
+
+model user {
+  id             Int      @id @default(autoincrement())
+  name           String
+  prenom         String
+  createdAt      DateTime @default(now())
+  email          String   @unique(map: "User_email_key")
+  lieuLivraison  String
+  telephone      String
+  profilecomplet Boolean  @default(false)
+
+  // Relations
+  orders         order[]
 }
 
 model order {
@@ -13,6 +27,10 @@ model order {
   total     Float
   createdAt DateTime @default(now())
   status    Boolean  @default(false)
+
+  // Relations
+  user      user     @relation(fields: [userId], references: [id])
+  items     orderitems[]
 
   @@index([userId], map: "Order_userId_fkey")
 }
@@ -23,6 +41,10 @@ model orderitems {
   productId Int
   quantity  Int
   price     Float
+
+  // Relations
+  order     order   @relation(fields: [orderId], references: [id])
+  product   product @relation(fields: [productId], references: [id])
 
   @@index([orderId], map: "OrderItems_orderId_fkey")
   @@index([productId], map: "OrderItems_productId_fkey")
@@ -35,15 +57,7 @@ model product {
   price       Float
   imageUrl    String?
   createdAt   DateTime @default(now())
-}
 
-model user {
-  id             Int      @id @default(autoincrement())
-  name           String
-  prenom         String
-  createdAt      DateTime @default(now())
-  email          String   @unique(map: "User_email_key")
-  lieuLivraison  String
-  telephone      String
-  profilecomplet Boolean  @default(false)
+  // Relations
+  orderItems  orderitems[]
 }

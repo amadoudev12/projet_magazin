@@ -23,7 +23,7 @@ export default function ProfileCompleted(){
         }catch(error){
             console.error('ereur:',error)
         }
-    }
+        }
 
     return (
         <div>

@@ -13,7 +13,7 @@ export default function Home() {
   const router = useRouter()
   // const isAuthenticated = status === "authenticated";
     useEffect(() => {
-      if (status === "unauthenticated") {
+      if (status !== "unauthenticated") {
         router.push("/client/login");
       }
     }, [status, router]);
