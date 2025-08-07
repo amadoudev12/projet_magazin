@@ -63,7 +63,7 @@ export async function GET() {
         );
     } catch (error) {
         console.error("Erreur POST /api/client:", error);
-        return NextResponse.json({ error: "Erreur serveur" }, { status: 500 });
+        return NextResponse.json({ error: error }, { status: 500 });
     }
     }
 
