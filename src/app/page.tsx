@@ -5,18 +5,18 @@ import Contact from "./components/Contact";
 import Nav from "./components/navBar";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
-import { useEffect } from "react";
+// import { useEffect } from "react";
 import Link from "next/link";
 
 export default function Home() {
   const { status} = useSession()
   const router = useRouter()
   // const isAuthenticated = status === "authenticated";
-    useEffect(() => {
-      if (status !== "unauthenticated") {
-        router.push("/client/login");
-      }
-    }, [status, router]);
+    // useEffect(() => {
+    //   if (status !== "unauthenticated") {
+    //     router.push("/client/login");
+    //   }
+    // }, [status, router]);
 
     if (status === "loading") {
       // Optionnel : spinner ou écran de chargement
