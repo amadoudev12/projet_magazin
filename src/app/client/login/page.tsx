@@ -28,25 +28,32 @@ export default function LoginPage () {
             router.push('/client/product')
         }
     }, [session, router])
-    const userAdd = async (e:React.FormEvent<HTMLFormElement>)=>{
-        e.preventDefault()
-        const res = await fetch('/api/client',{
-            method:"POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({name, prenom, email, telephone,lieu})
-        })
-        const data = await res.json()
-        if(res.ok){
-            // pour creer une session 
-            await signIn("credentials",{
-                email: email
-            })
-            alert(data.message)
-            router.push('/client/product') // ✅ Corrigé
-        }else{
-            console.log("erreur"+data.message)
-        }
-    }
+
+
+        const userAdd = async (e: React.FormEvent<HTMLFormElement>) => {
+            e.preventDefault();
+            try {
+                const res = await fetch('/api/client', {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ name, prenom, email, telephone, lieu })
+                });
+                const data = await res.json();
+                if (!res.ok) {
+                console.error("Erreur API:", data);
+                console.log(data.error || data.message || "Erreur lors de l'inscription.");
+                return;
+                }
+
+                await signIn("credentials", { email: email });
+                console.log(data.message);
+                router.push('/client/product');
+            } catch (err: any) {
+                console.error("Erreur front:", err.message);
+                console.log("Une erreur est survenue.");
+            }
+        };
+
 
     return (
     <div className="min-h-screen bg-gray-50 flex flex-col items-center justify-center py-12 px-4">
