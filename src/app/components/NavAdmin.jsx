@@ -33,7 +33,7 @@ import { Menu, X } from "lucide-react" // icons
             ${open ? "translate-x-0" : "-translate-x-full md:translate-x-0"}`}
         >
             <h1 className="mb-6 pb-2 border-b text-center text-2xl font-bold text-green-700">
-            AgriVente
+            Daloa ~ Kalifa
             </h1>
 
             <nav>

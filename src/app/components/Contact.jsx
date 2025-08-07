@@ -31,10 +31,10 @@ const Contact= () => {
             <h2 className="text-3xl font-bold text-orange-600 mb-6">Nos coordonnées</h2>
             <ul className="space-y-4 text-lg">
                 <li>
-                <strong>Adresse :</strong> Abidjan, Abobote
+                <strong>Adresse :</strong> Abidjan, Abobo Té
                 </li>
                 <li>
-                <strong>Téléphone :</strong> <a href="tel:+2250102030405" className="text-orange-600">+225 01 02 03 04 05</a>
+                <strong>Téléphone :</strong> <a href="tel:+2250102030405" className="text-orange-600">+225 07 08 46 50 70</a>
                 </li>
                 {/* <li>
                 <strong>Email :</strong> <a href="mailto:contact@monsite.com" className="text-orange-600">contact@monsite.com</a>
@@ -45,9 +45,14 @@ const Contact= () => {
                 <li>
                 <strong>Réseaux sociaux :</strong>
                 <div className="flex gap-4 mt-2">
-                    <a href="#" className="text-orange-600 hover:underline">Facebook</a>
-                    {/* <a href="#" className="text-orange-600 hover:underline">Instagram</a> */}
-                    <a href="#" className="text-orange-600 hover:underline">Whastapp</a>
+                    <a
+                        href="https://wa.me/2250708465070"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-orange-600 hover:underline"
+                        >
+                        WhatsApp
+                    </a>
                 </div>
                 </li>
             </ul>

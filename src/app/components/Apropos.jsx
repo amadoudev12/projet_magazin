@@ -3,9 +3,9 @@ import { Award, Users, Truck, Shield, CheckCircle, Star, Quote } from 'lucide-re
 
 
   const stats = [
-    { number: "15+", label: "Années d'expérience", icon: <Award className="h-8 w-8" /> },
-    { number: "50K+", label: "Clients satisfaits", icon: <Users className="h-8 w-8" /> },
-    { number: "98%", label: "Taux de satisfaction", icon: <Star className="h-8 w-8" /> },
+    { number: "2+", label: "Années d'expérience", icon: <Award className="h-8 w-8" /> },
+    { number: "100+", label: "Clients satisfaits", icon: <Users className="h-8 w-8" /> },
+    { number: "75%", label: "Taux de satisfaction", icon: <Star className="h-8 w-8" /> },
     { number: "24h", label: "Livraison garantie", icon: <Truck className="h-8 w-8" /> }
   ];
 
