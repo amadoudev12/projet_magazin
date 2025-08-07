@@ -3,6 +3,7 @@ import Image from "next/image";
 import Apropos from "./components/Apropos";
 import Contact from "./components/Contact";
 import Nav from "./components/navBar";
+import { useEffect } from "react";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 // import { useEffect } from "react";
@@ -12,11 +13,11 @@ export default function Home() {
   const { status} = useSession()
   const router = useRouter()
   // const isAuthenticated = status === "authenticated";
-    // useEffect(() => {
-    //   if (status !== "unauthenticated") {
-    //     router.push("/client/login");
-    //   }
-    // }, [status, router]);
+    useEffect(() => {
+      if (status !== "unauthenticated") {
+        router.push("/client/login");
+      }
+    }, [status, router]);
 
     if (status === "loading") {
       // Optionnel : spinner ou écran de chargement
@@ -33,9 +34,9 @@ export default function Home() {
     );
     }
 
-    // if (status === "unauthenticated") {
-    //   return null; // Évite de rendre la page avant la redirection
-    // }
+    if (status === "unauthenticated") {
+      return null; // Évite de rendre la page avant la redirection
+    }
 
     return (
       <> 
