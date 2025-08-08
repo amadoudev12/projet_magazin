@@ -12,12 +12,12 @@ import Link from "next/link";
 export default function Home() {
   const { status} = useSession()
   const router = useRouter()
-  const isAuthenticated = status === "authenticated";
-    useEffect(() => {
-      if (!isAuthenticated) {
-        router.push("/client/login");
-      }
-    }, [status, router]);
+  // const isAuthenticated = status === "authenticated";
+  //   useEffect(() => {
+  //     if (!isAuthenticated) {
+  //       router.push("/client/login");
+  //     }
+  //   }, [status, router]);
 
     if (status === "loading") {
       // Optionnel : spinner ou écran de chargement
