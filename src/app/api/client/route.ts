@@ -8,27 +8,23 @@ export async function GET() {
     try {
         const AllClients = await prisma.user.findMany();
         return NextResponse.json(AllClients);
-    } catch (erreur) {
+    }catch (erreur) {
         console.error('Erreur GET /api/client:', erreur);
         return NextResponse.json({ error: "Erreur serveur" }, { status: 500 });
     }
     }
-
     export async function POST(req: Request) {
     try {
         const body = await req.json();
-
         const existingUser = await prisma.user.findUnique({
         where: { email: body.email },
         });
-
         if (existingUser) {
         return NextResponse.json(
             { message: "utilisateur déjà connecté" },
             { status: 201 }
         );
         }
-
         const newUser = await prisma.user.create({   // Correction ici : 'user' en minuscule
         data: {
             name: body.name,
@@ -37,12 +33,10 @@ export async function GET() {
             telephone: body.telephone,
             lieuLivraison: body.lieu,
         },
-        });
-
+        })
         if (!process.env.NEXTAUTH_SECRET) {
         throw new Error("NEXTAUTH_SECRET non défini");
         }
-
         // création du token
         const token = jwt.sign(
         {
@@ -56,7 +50,6 @@ export async function GET() {
         process.env.NEXTAUTH_SECRET,
         { expiresIn: "1h" }
         );
-
         return NextResponse.json(
         { message: "utilisateur enregistré avec succès", token, user: newUser },
         { status: 201 }
@@ -66,16 +59,13 @@ export async function GET() {
         return NextResponse.json({ error: error }, { status: 500 });
     }
     }
-
     export async function PUT(req: Request) {
     try {
         const body = await req.json();
         const session = await getServerSession(authOptions);
-
         if (!session || !session.user.email) {
         return NextResponse.json({ message: "Non autorisé" }, { status: 401 });
         }
-
         await prisma.user.update({
         where: { email: session.user.email },
         data: {
@@ -83,7 +73,6 @@ export async function GET() {
             lieuLivraison: body.lieu,
         },
         });
-
         return NextResponse.json(
         { message: "Mise à jour réussie" },
         { status: 200 }

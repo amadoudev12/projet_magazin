@@ -3,7 +3,7 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"  // ✅ Corrigé
+  provider = "mysql"
   url      = env("DATABASE_URL")
 }
 
