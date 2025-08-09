@@ -7,7 +7,6 @@ CREATE TABLE "user" (
     "email" TEXT NOT NULL,
     "lieuLivraison" TEXT NOT NULL,
     "telephone" TEXT NOT NULL,
-    "profilecomplet" BOOLEAN NOT NULL DEFAULT false,
 
     CONSTRAINT "user_pkey" PRIMARY KEY ("id")
 );
