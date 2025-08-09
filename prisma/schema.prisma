@@ -15,7 +15,6 @@ model user {
   email          String   @unique(map: "User_email_key")
   lieuLivraison  String
   telephone      String
-  profilecomplet Boolean  @default(false)
 
   // Relations
   orders         order[]
