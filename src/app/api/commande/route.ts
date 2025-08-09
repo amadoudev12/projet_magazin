@@ -48,7 +48,7 @@ export async function POST(req: NextRequest) {
         data: {
             userId: user.id,
             total,
-            orderItems: { // <- correction ici
+            items: { // <- correction ici
             create: items.map((b: OrderItem) => ({
                 productId: b.id,
                 quantity: b.quantity,

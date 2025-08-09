@@ -1,6 +1,7 @@
 "use client"
 
 import { useState } from "react"
+import toast from "react-hot-toast"
 
 export default function ProductAdd() {
     const [name, setProduitName] = useState("")
@@ -22,7 +23,8 @@ export default function ProductAdd() {
                 body: formData
             });
             if (res.ok) {
-                alert("Produit enregistré !");
+                // alert("Produit enregistré !");
+                toast.success('produit enregistré avec succes')
                 setProduitName("");
                 setProduitdesc("");
                 setProduitPrice("");

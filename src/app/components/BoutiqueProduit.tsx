@@ -14,14 +14,12 @@ const BoutiqueProduit = ({ produits }: { produits: product[] }) => {
     const [sommeTotal, setSomme] = useState(0)
     const [cart, setCart ] = useState<{id:number, name:string, count:number, price:number , total:number}[]>([])
     const [loading, setLoading] = useState(false)
-
     const {data:session, status} = useSession()
     const router = useRouter()
 // 10 10 2004 
     useEffect(() => {
-        if(status === "loading") return
-        if (status === "authenticated" && (!session.user?.telephone || !session.user?.lieuLivraison)) {
-            router.push('/client/completeprofile') // ✅ Corrigé
+        if (status !== "authenticated") {
+            router.push('/client/login') // ✅ Corrigé
         }
     }, [session, router, status])
 
@@ -240,9 +238,6 @@ return (
                                 } catch (error) {
                                     console.error('erreur: ', error)
                                 } 
-                                // finally {
-                                //     setLoading(false)
-                                // }
                             }}
                         >
                             Valider la commande

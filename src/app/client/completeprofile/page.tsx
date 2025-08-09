@@ -1,6 +1,7 @@
 "use client"
 import { useState } from "react"
 import { useRouter } from "next/navigation"
+import toast from "react-hot-toast"
 export default function ProfileCompleted(){
     const [telephone, setTelephone] =  useState('')
     const [lieu, setLieu] =  useState('')
@@ -15,6 +16,7 @@ export default function ProfileCompleted(){
             })
             const data = await res.json()
             if(res.ok){
+                toast.success('Profile completer avec success')
                 console.log('donnée completé avec success'+data.message)
                 setTelephone('')
                 setLieu('')

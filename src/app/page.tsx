@@ -10,34 +10,6 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 
 export default function Home() {
-  const { status} = useSession()
-  const router = useRouter()
-  // const isAuthenticated = status === "authenticated";
-  //   useEffect(() => {
-  //     if (!isAuthenticated) {
-  //       router.push("/client/login");
-  //     }
-  //   }, [status, router]);
-
-    if (status === "loading") {
-      // Optionnel : spinner ou écran de chargement
-      return (
-      <div className="h-screen flex flex-col justify-center items-center bg-gradient-to-br from-green-100 via-white to-green-50">
-        {/* Spinner animé */}
-        <div className="w-16 h-16 border-4 border-green-600 border-dashed rounded-full animate-spin"></div>
-
-        {/* Texte animé */}
-        <p className="mt-6 text-lg font-semibold text-green-700 animate-pulse">
-          Chargement en cours...
-        </p>
-      </div>
-    );
-    }
-
-    // if (status === "unauthenticated") {
-    //   return null; // Évite de rendre la page avant la redirection
-    // }
-
     return (
       <> 
       <Nav/>  

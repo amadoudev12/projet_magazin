@@ -80,7 +80,7 @@ function CommandCard({ commande }) {
                         <h3 className="font-semibold text-gray-700 mb-2">
                             Détails de la commande 
                         </h3>
-                        {commande.orderItems.map((item, index) => (
+                        {commande.items.map((item, index) => (
                             <div key={index} className="flex justify-between border-b py-2 text-sm">
                                 <span><b>{item.product.name}</b></span>
                                 <span>Qté : {item.quantity}</span>

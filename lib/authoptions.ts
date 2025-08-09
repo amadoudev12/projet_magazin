@@ -9,11 +9,10 @@ export const authOptions: AuthOptions = {
     secret: process.env.NEXTAUTH_SECRET,
 
     providers: [
-        GoogleProvider({
-        clientId: process.env.GOOGLE_CLIENT_ID!,
-        clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
-        }),
-        
+        // GoogleProvider({
+        // clientId: process.env.GOOGLE_CLIENT_ID!,
+        // clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
+        // }),
         CredentialsProvider({
         name: "Credentials",
         credentials: {
@@ -41,32 +40,32 @@ export const authOptions: AuthOptions = {
     ],
 
     callbacks: {
-        async signIn({ user }) {
-        try {
-            const existingUser = await prisma.user.findUnique({
-            where: { email: user.email! },
-            })
+        // async signIn({ user }) {
+        // try {
+        //     const existingUser = await prisma.user.findUnique({
+        //     where: { email: user.email! },
+        //     })
 
-            if (!existingUser) {
-            const parts = user.name?.split(" ") ?? ["", ""]
-            const nom = parts[0]
-            const prenom = parts.slice(1).join(" ")
-            await prisma.user.create({
-                data: {
-                name: nom,
-                prenom: prenom,
-                email: user.email!,
-                telephone: "",
-                lieuLivraison: "",
-                },
-            })
-            }
-        } catch (error) {
-            console.error("Erreur signIn:", error)
-            return false
-        }
-        return true
-        },
+        //     if (!existingUser) {
+        //     const parts = user.name?.split(" ") ?? ["", ""]
+        //     const nom = parts[0]
+        //     const prenom = parts.slice(1).join(" ")
+        //     await prisma.user.create({
+        //         data: {
+        //         name: nom,
+        //         prenom: prenom,
+        //         email: user.email!,
+        //         telephone: "",
+        //         lieuLivraison: "",
+        //         },
+        //     })
+        //     }
+        // } catch (error) {
+        //     console.error("Erreur signIn:", error)
+        //     return false
+        // }
+        // return true
+        // },
 
         async jwt({ token }) {
             if (!token.email) return token

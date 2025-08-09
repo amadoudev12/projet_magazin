@@ -26,7 +26,6 @@ export default function CommandePage() {
     const [commandes, setCommandes ] = useState<Commande[]>([])
     // const [selectedId, setSelectedId] = useState<number | null>(null)
     
-
     useEffect(()=>{
         const GetOrders = async ()=>{
             const res = await fetch('/api/commande')
