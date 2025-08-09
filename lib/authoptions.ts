@@ -1,4 +1,3 @@
-import GoogleProvider from "next-auth/providers/google"
 import CredentialsProvider from "next-auth/providers/credentials"
 import { PrismaClient } from "@prisma/client"
 import { AuthOptions } from "next-auth"

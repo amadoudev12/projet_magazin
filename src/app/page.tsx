@@ -3,10 +3,6 @@ import Image from "next/image";
 import Apropos from "./components/Apropos";
 import Contact from "./components/Contact";
 import Nav from "./components/navBar";
-import { useEffect } from "react";
-import { useSession } from "next-auth/react";
-import { useRouter } from "next/navigation";
-// import { useEffect } from "react";
 import Link from "next/link";
 
 export default function Home() {
