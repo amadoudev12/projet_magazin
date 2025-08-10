@@ -1,7 +1,7 @@
 // app/api/commandes/route.ts
 import { NextRequest, NextResponse } from "next/server"
 import { getServerSession } from "next-auth"
-import { authOptions } from "../../../../lib/authoptions"
+import authOptions from "../../../../lib/authoptions"
 import prisma from "../../../../lib/prisma"
 type OrderItem = {
     id: number

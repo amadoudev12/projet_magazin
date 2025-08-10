@@ -14,14 +14,26 @@ const BoutiqueProduit = ({ produits }: { produits: product[] }) => {
     const [sommeTotal, setSomme] = useState(0)
     const [cart, setCart ] = useState<{id:number, name:string, count:number, price:number , total:number}[]>([])
     const [loading, setLoading] = useState(false)
-    const {data:session, status} = useSession()
+    const {status} = useSession()
     const router = useRouter()
 // 10 10 2004 
+    useEffect(()=>{
+        console.log(cart)
+        const somme = cart.reduce((s,c)=> s + c.total, 0)
+        setSomme(somme)
+        console.log(somme)
+    },[cart])
+
+    const [viewCart , setViewCart] = useState(false)
     useEffect(() => {
-    if (status === "unauthenticated") {
-        router.push('/client/login');
-    }
+        if (status === "unauthenticated") {
+            router.push('/client/login');
+        }
     }, [status, router]);
+
+    if (status === "unauthenticated") {
+        return null;
+    }
     if (status === "loading") {
         return (
             <div className="flex justify-center items-center min-h-screen">
@@ -29,11 +41,10 @@ const BoutiqueProduit = ({ produits }: { produits: product[] }) => {
             </div>
         );
     }
-    
     if (loading) {
-    setTimeout(() => {
-        setLoading(false);
-    }, 3000);
+        setTimeout(() => {
+            setLoading(false);
+        }, 3000);
     }
     const addToCart = (id: number, count: number) => {
     setCart((prev) => {
@@ -63,14 +74,7 @@ const BoutiqueProduit = ({ produits }: { produits: product[] }) => {
         }
     })
     }
-    useEffect(()=>{
-        console.log(cart)
-        const somme = cart.reduce((s,c)=> s + c.total, 0)
-        setSomme(somme)
-        console.log(somme)
-    },[cart])
 
-    const [viewCart , setViewCart] = useState(false)
 
     
 return (
