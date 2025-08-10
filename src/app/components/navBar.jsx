@@ -48,7 +48,7 @@ const MenuItems = [
             </h1>
 
             {/* Desktop Menu */}
-            <ul className="hidden md:flex items-center gap-8">
+            <ul className="hidden md:flex items-center gap-8 z-10">
             {MenuItems.map((item) => {
                 const isActive = pathname === item.path;
                 return (
@@ -101,7 +101,7 @@ const MenuItems = [
 
         {/* Menu Mobile */}
         {menuOpen && (
-            <ul className="md:hidden mt-3 flex flex-col items-center gap-4 bg-white px-6 py-4 shadow-lg rounded-lg animate-slideDown">
+            <ul className="md:hidden mt-3 flex flex-col z-10 items-center gap-4 bg-white px-6 py-4 shadow-lg rounded-lg animate-slideDown">
             {MenuItems.map((item) => (
                 <li key={item.name}>
                 <Link
