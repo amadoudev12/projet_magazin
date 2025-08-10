@@ -13,32 +13,35 @@ export default function LoginPage () {
     const [email, setEmail] =  useState('')
     const [telephone, setTelephone] =  useState('')
     const [lieu, setLieu] =  useState('')
-        const userAdd = async (e: React.FormEvent<HTMLFormElement>) => {
+
+    const userAdd = async (e: React.FormEvent<HTMLFormElement>) => {
             e.preventDefault();
             try {
                 const res = await fetch('/api/client', {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ name, prenom,email, telephone, lieu })
+                body: JSON.stringify({ name, prenom, email, telephone, lieu }),
                 });
                 const data = await res.json();
+
                 if (!res.ok) {
                 console.error("Erreur API:", data);
-                console.log(data.error || data.message || "Erreur lors de l'inscription.");
                 return;
                 }
-                await signIn("credentials", { email: email });
-                console.log(data.message);
-                router.push('/client/product');
-            }catch (err: unknown) {
-            if (err instanceof Error) {
-                console.error("Erreur front:", err.message);
-            } else {
-                console.error("Erreur front inconnue:", err);
+
+                const signInResult = await signIn("credentials", { email: email, redirect: false });
+
+                if (signInResult?.ok) {
+                router.push('/client/product');  // redirection ici, après connexion réussie
+                } else {
+                console.error("Échec de la connexion");
+                }
+
+            } catch (err) {
+                console.error("Erreur front:", err);
             }
-            console.log("Une erreur est survenue.");
-            }
-        };
+            };
+
     return (
     <div className="min-h-screen bg-gray-50 flex flex-col items-center justify-center py-12 px-4">
         <div className="w-full max-w-md bg-white rounded-xl shadow-lg p-8 space-y-6">
