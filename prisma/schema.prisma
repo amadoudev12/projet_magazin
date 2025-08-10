@@ -8,40 +8,34 @@ datasource db {
 }
 
 model user {
-  id             Int      @id @default(autoincrement())
-  name           String
-  prenom         String
-  createdAt      DateTime @default(now())
-  email          String   @unique(map: "User_email_key")
-  lieuLivraison  String
-  telephone      String
-
-  // Relations
-  orders         order[]
+  id            Int      @id @default(autoincrement())
+  name          String
+  prenom        String
+  createdAt     DateTime @default(now())
+  email         String   @unique(map: "User_email_key")
+  lieuLivraison String
+  telephone     String
+  orders        order[]
 }
 
 model order {
-  id        Int      @id @default(autoincrement())
+  id        Int          @id @default(autoincrement())
   userId    Int
   total     Float
-  createdAt DateTime @default(now())
-  status    Boolean  @default(false)
-
-  // Relations
-  user      user     @relation(fields: [userId], references: [id])
+  createdAt DateTime     @default(now())
+  status    Boolean      @default(false)
+  user      user         @relation(fields: [userId], references: [id])
   items     orderitems[]
 
   @@index([userId], map: "Order_userId_fkey")
 }
 
 model orderitems {
-  id        Int   @id @default(autoincrement())
+  id        Int     @id @default(autoincrement())
   orderId   Int
   productId Int
   quantity  Int
   price     Float
-
-  // Relations
   order     order   @relation(fields: [orderId], references: [id])
   product   product @relation(fields: [productId], references: [id])
 
@@ -50,13 +44,11 @@ model orderitems {
 }
 
 model product {
-  id          Int      @id @default(autoincrement())
+  id          Int          @id @default(autoincrement())
   name        String
   description String?
   price       Float
   imageUrl    String?
-  createdAt   DateTime @default(now())
-
-  // Relations
+  createdAt   DateTime     @default(now())
   orderItems  orderitems[]
 }
