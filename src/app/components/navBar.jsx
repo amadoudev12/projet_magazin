@@ -5,7 +5,7 @@ import { FaHome, FaAddressBook, FaCartArrowDown, FaBars, FaTimes } from "react-i
 import { MdProductionQuantityLimits } from "react-icons/md";
 import { IoMdContact } from "react-icons/io";
 import { usePathname } from "next/navigation";
-// import { signOut } from "next-auth/react";
+import { signOut } from "next-auth/react";
 import { useSession } from "next-auth/react";
 
 const MenuItems = [
@@ -121,14 +121,14 @@ const MenuItems = [
                 onClick={() => setMenuOpen(false)}
                 className="flex items-center gap-3 text-gray-800 hover:text-orange-600 transition duration-300"
                 >
-                <FaCartArrowDown className="text-xl" />
-                <span className="text-lg font-medium">Panier</span>
+                {/* <FaCartArrowDown className="text-xl" /> */}
+                {/* <span className="text-lg font-medium">Panier</span> */}
                 </Link>
             </li>
 
             {isAuthenticated && (
                 <>
-                {/* <li>
+                <li>
                     <button
                     onClick={() => {
                         signOut();
@@ -138,7 +138,7 @@ const MenuItems = [
                     >
                     Déconnexion
                     </button>
-                </li> */}
+                </li>
                 {admin && (
                     <li>
                     <Link
