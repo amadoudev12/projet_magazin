@@ -40,6 +40,11 @@ const authOptions: NextAuthOptions = {
             token.name = user.name;
             token.prenom = user.prenom;
             token.email = user.email;
+            if(user.email === process.env.ADMIN_EMAIL){
+                token.role = "admin"
+            }else{
+                token.role = "client"
+            }
         }
         return token;
         },
@@ -49,6 +54,7 @@ const authOptions: NextAuthOptions = {
             session.user.name = token.name;
             session.user.prenom = typeof token.prenom === "string" ? token.prenom : undefined;
             session.user.email = token.email;
+            session.user.role = token.role
         }
         return session;
         },

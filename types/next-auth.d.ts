@@ -13,6 +13,7 @@ declare module "next-auth" {
         prenom?: string | null;
         telephone?: string | null;
         lieuLivraison?: string | null;
+        role? : String | null;
         }
     interface Session {
         user: {

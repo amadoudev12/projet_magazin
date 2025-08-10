@@ -7,7 +7,7 @@ export default withAuth(
 
         // Si l'utilisateur n'est pas admin, on redirige vers une page personnalisée
         if (token?.role !== "admin") {
-        return NextResponse.redirect(new URL("/client/product", req.url))
+            return NextResponse.redirect(new URL("/client/product", req.url))
         }
 
         // Sinon, on laisse passer
