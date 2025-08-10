@@ -63,7 +63,7 @@ const  AboutPage = () => {
               <span className="bg-gradient-to-r from-orange-600 to-green-600 bg-clip-text text-transparent"> Daloa ~ Kalifa</span>
             </h1>
             <p className="text-xl text-gray-600 max-w-4xl mx-auto leading-relaxed mb-12">
-              Depuis 2008, nous révolutionnons l'accès aux produits frais de qualité en créant
+              Depuis 2023, nous révolutionnons l'accès aux produits frais de qualité en créant
               un pont direct entre les meilleurs producteurs locaux et votre cuisine.
             </p>
           </div>

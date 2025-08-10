@@ -59,6 +59,7 @@ export default function LoginPage () {
         <div className="w-full max-w-md bg-white rounded-xl shadow-lg p-8 space-y-6">
             {/* Formulaire */}
             <form onSubmit={userAdd}  className="space-y-4 mt-4">
+                <h1>Veuillez entrer vos coordonnées</h1>
                 <div>
                 <label className="block text-gray-700 font-medium mb-1">Nom</label>
                 <input
