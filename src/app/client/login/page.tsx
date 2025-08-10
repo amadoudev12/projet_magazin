@@ -2,6 +2,7 @@
 import { signIn} from "next-auth/react"
 import {  useState } from "react"
 import { useRouter } from "next/navigation"
+import toast from "react-hot-toast"
 
 
 export default function LoginPage () {
@@ -15,32 +16,43 @@ export default function LoginPage () {
     const [lieu, setLieu] =  useState('')
 
     const userAdd = async (e: React.FormEvent<HTMLFormElement>) => {
-            e.preventDefault();
-            try {
-                const res = await fetch('/api/client', {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ name, prenom, email, telephone, lieu }),
-                });
-                const data = await res.json();
+    e.preventDefault();
+    try {
+        // D'abord créer l'utilisateur
+        const res = await fetch('/api/client', {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ name, prenom, email, telephone, lieu }),
+        });
+        
+        if (!res.ok) {
+            const data = await res.json();
+            console.error("Erreur API:", data);
+            toast.error('Impossible de créer le compte');
+            return;
+        }
+        
+        toast.success('Compte créé avec succès');
+        
+        // Ensuite tenter la connexion
+        const signInResult = await signIn("credentials", { 
+            email: email, 
+            redirect: false 
+        });
+        
+        if (!signInResult?.error) {
+            // Redirection seulement si pas d'erreur
+            router.push('/client/product');
+        } else {
+            console.error("Échec de la connexion:", signInResult.error);
+            toast.error('Connexion échouée');
+        }
 
-                if (!res.ok) {
-                console.error("Erreur API:", data);
-                return;
-                }
-
-                const signInResult = await signIn("credentials", { email: email, redirect: false });
-
-                if (signInResult?.ok) {
-                router.push('/client/product');  // redirection ici, après connexion réussie
-                } else {
-                console.error("Échec de la connexion");
-                }
-
-            } catch (err) {
-                console.error("Erreur front:", err);
-            }
-            };
+    } catch (err) {
+        console.error("Erreur front:", err);
+        toast.error('Une erreur est survenue');
+    }
+}
 
     return (
     <div className="min-h-screen bg-gray-50 flex flex-col items-center justify-center py-12 px-4">

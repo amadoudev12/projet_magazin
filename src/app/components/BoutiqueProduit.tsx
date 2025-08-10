@@ -18,11 +18,18 @@ const BoutiqueProduit = ({ produits }: { produits: product[] }) => {
     const router = useRouter()
 // 10 10 2004 
     useEffect(() => {
-        if (status !== "authenticated") {
-            router.push('/client/login') // ✅ Corrigé
-        }
-    }, [session, router, status])
-
+    if (status === "unauthenticated") {
+        router.push('/client/login');
+    }
+    }, [status, router]);
+    if (status === "loading") {
+        return (
+            <div className="flex justify-center items-center min-h-screen">
+                <Loader2 className="animate-spin h-12 w-12 text-orange-500" />
+            </div>
+        );
+    }
+    
     if (loading) {
     setTimeout(() => {
         setLoading(false);

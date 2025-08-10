@@ -1,4 +1,6 @@
 import { BsCart } from "react-icons/bs";
+import { FaUsers } from "react-icons/fa";
+import { TbMoneybag } from "react-icons/tb";
 import prisma from "../../../lib/prisma";
 
 export const dynamic = 'force-dynamic';  // <<< Ajout ici
@@ -23,6 +25,7 @@ export default async function AdminPage(){
                 <div className="border-2 border-gray-200 bg-white p-7 w-64 rounded-xl shadow-lg hover:shadow-2xl transition">
                     <div className="mb-3 flex gap-6 items-center">
                         <p className="text-gray-600 font-medium">Chiffres d&apos;affaires</p>
+                        <TbMoneybag className="text-blue-500 text-xl font-bold"/>
                         <p className="text-green-500 text-xl font-bold"></p>
                     </div>
                     <h2 className="font-bold text-3xl text-gray-800">{ChiffreAffaire._sum.total} FCFA</h2>
@@ -31,7 +34,7 @@ export default async function AdminPage(){
                 {/* Carte 2 */}
                 <div className="border-2 border-gray-200 bg-white p-7 w-64 rounded-xl shadow-lg hover:shadow-2xl transition">
                     <div className="mb-3 flex gap-6 items-center">
-                        <p className="text-gray-600 font-medium">Commandes</p>
+                        <p className="text-gray-600 font-medium">Les Commandes</p>
                         <BsCart className="text-blue-500 text-xl font-bold"/>
                     </div>
                     <h2 className="font-bold text-3xl text-gray-800">{nombreCommande}</h2>
@@ -40,8 +43,8 @@ export default async function AdminPage(){
                 {/* Carte 3 */}
                 <div className="border-2 border-gray-200 bg-white p-7 w-64 rounded-xl shadow-lg hover:shadow-2xl transition">
                     <div className="mb-3 flex gap-6 items-center">
-                        <p className="text-gray-600 font-medium">Clients</p>
-                        <BsCart className="text-blue-500 text-xl font-bold"/>
+                        <p className="text-gray-600 font-medium"> Vos Clients</p>
+                        <FaUsers className="text-blue-500 text-xl font-bold"/>
                     </div>
                     <h2 className="font-bold text-3xl text-gray-800">{nombreClient}</h2>
                 </div>

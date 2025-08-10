@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import prisma from "../../../../lib/prisma";
 import jwt from "jsonwebtoken";
 import { getServerSession } from "next-auth";
-import { authOptions } from "../../../../lib/authoptions";
+import authOptions from "../../../../lib/authoptions";
 
 export async function GET() {
     try {

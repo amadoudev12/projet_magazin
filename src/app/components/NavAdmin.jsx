@@ -18,7 +18,7 @@ import { Menu, X } from "lucide-react" // icons
     return (
         <>
         {/* Bouton pour mobile */}
-        <div className="md:hidden fixed top-4 left-4 z-50">
+        <div className="md:hidden fixed top-4 right-4 z-50">
             <button
             onClick={() => setOpen(!open)}
             className="p-2 bg-green-700 text-white rounded-lg shadow-md"

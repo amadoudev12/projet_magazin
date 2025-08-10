@@ -1,9 +1,8 @@
-    // pages/api/auth/[...nextauth].ts
-    import NextAuth from "next-auth";
-    import CredentialsProvider from "next-auth/providers/credentials";
-    import prisma from "./prisma";
+import NextAuth, { NextAuthOptions } from "next-auth";
+import CredentialsProvider from "next-auth/providers/credentials";
+import prisma from "../lib/prisma"; // ajuste le chemin selon ton projet
 
-    export default NextAuth({
+const authOptions: NextAuthOptions = {
     secret: process.env.NEXTAUTH_SECRET,
     providers: [
         CredentialsProvider({
@@ -21,7 +20,6 @@
 
             if (!user) return null;
 
-            // Retourne un objet utilisateur minimal
             return {
                 id: user.id.toString(),
                 name: user.name,
@@ -37,7 +35,6 @@
     ],
     callbacks: {
         async jwt({ token, user }) {
-        // Au premier login, user est défini
         if (user) {
             token.id = user.id;
             token.name = user.name;
@@ -57,4 +54,6 @@
         },
     },
     debug: true,
-});
+    };
+
+export default authOptions;
