@@ -1,7 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import prisma from "../../../../lib/prisma";
-import { writeFile } from "fs/promises";
-import path from "path";
+import { v2 as cloudinary } from "cloudinary";
 
 export async function GET(){
   try{
@@ -12,28 +11,54 @@ export async function GET(){
   }
 }
 
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
+});
 export async function POST(req: NextRequest) {
-  const formData = await req.formData();
-  
-  const file = formData.get("image") as File | null;
-  if (!file) return NextResponse.json({ error: "Aucun fichier" }, { status: 400 });
+  try {
+    const formData = await req.formData();
+    const file = formData.get("image") as File | null;
 
-  // On sauvegarde le fichier
-  const bytes = await file.arrayBuffer();
-  const buffer = Buffer.from(bytes);
-  const filePath = path.join(process.cwd(), "public/uploads", file.name);
-  await writeFile(filePath, buffer);
+    if (!file) {
+      return NextResponse.json({ error: "Aucun fichier" }, { status: 400 });
+    }
 
-  const product = await prisma.product.create({
-    data: {
-      name: formData.get("name") as string,
-      description: formData.get("description") as string,
-      price: parseFloat(formData.get("price") as string),
-      imageUrl: `/uploads/${file.name}`,
-    },
-  });
+    // Convertir le fichier en buffer
+    const bytes = await file.arrayBuffer();
+    const buffer = Buffer.from(bytes);
+
+    // Upload vers Cloudinary
+    const uploadResult = await new Promise((resolve, reject) => {
+      const stream = cloudinary.uploader.upload_stream(
+        { folder: "products" },
+        (error, result) => {
+          if (error) return reject(error);
+          resolve(result);
+        }
+      );
+      stream.end(buffer);
+    });
+
+    // Création du produit en DB
+    const product = await prisma.product.create({
+      data: {
+        name: formData.get("name") as string,
+        description: formData.get("description") as string,
+        price: parseFloat(formData.get("price") as string),
+        imageUrl: (uploadResult as any).secure_url,
+      },
+    });
 
   return NextResponse.json(product, { status: 201 });
+  } catch (error) {
+    console.error(error);
+    return NextResponse.json(
+      { error: "Erreur lors de la création du produit" },
+      { status: 500 }
+    );
+  }
 }
 
 export async function DELETE (req:Request){
