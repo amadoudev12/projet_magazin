@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import prisma from "../../../../lib/prisma";
-import { v2 as cloudinary } from "cloudinary";
+import { v2 as cloudinary, UploadApiResponse  } from "cloudinary";
 
 export async function GET(){
   try{
@@ -16,6 +16,14 @@ cloudinary.config({
   api_key: process.env.CLOUDINARY_API_KEY,
   api_secret: process.env.CLOUDINARY_API_SECRET,
 });
+
+
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
+});
+
 export async function POST(req: NextRequest) {
   try {
     const formData = await req.formData();
@@ -25,33 +33,30 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: "Aucun fichier" }, { status: 400 });
     }
 
-    // Convertir le fichier en buffer
     const bytes = await file.arrayBuffer();
     const buffer = Buffer.from(bytes);
 
-    // Upload vers Cloudinary
-    const uploadResult = await new Promise((resolve, reject) => {
+    const uploadResult: UploadApiResponse = await new Promise((resolve, reject) => {
       const stream = cloudinary.uploader.upload_stream(
         { folder: "products" },
         (error, result) => {
-          if (error) return reject(error);
-          resolve(result);
+          if (error || !result) return reject(error);
+          resolve(result as UploadApiResponse);
         }
       );
       stream.end(buffer);
     });
 
-    // Création du produit en DB
     const product = await prisma.product.create({
       data: {
         name: formData.get("name") as string,
         description: formData.get("description") as string,
         price: parseFloat(formData.get("price") as string),
-        imageUrl: (uploadResult as any).secure_url,
+        imageUrl: uploadResult.secure_url,
       },
     });
 
-  return NextResponse.json(product, { status: 201 });
+    return NextResponse.json(product, { status: 201 });
   } catch (error) {
     console.error(error);
     return NextResponse.json(
@@ -60,6 +65,7 @@ export async function POST(req: NextRequest) {
     );
   }
 }
+
 
 export async function DELETE (req:Request){
       try {
