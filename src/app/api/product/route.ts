@@ -36,12 +36,12 @@ export async function POST(req: NextRequest) {
     const bytes = await file.arrayBuffer();
     const buffer = Buffer.from(bytes);
 
-    const uploadResult: UploadApiResponse = await new Promise((resolve, reject) => {
+    const uploadResult = await new Promise<UploadApiResponse>((resolve, reject) => {
       const stream = cloudinary.uploader.upload_stream(
         { folder: "products" },
         (error, result) => {
           if (error || !result) return reject(error);
-          resolve(result as UploadApiResponse);
+          resolve(result);
         }
       );
       stream.end(buffer);
