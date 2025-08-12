@@ -13,7 +13,8 @@ export async function GET() {
         return NextResponse.json({ error: "Erreur serveur" }, { status: 500 });
     }
     }
-    export async function POST(req: Request) {
+
+export async function POST(req: Request) {
     try {
         const body = await req.json();
         const existingUser = await prisma.user.findUnique({
@@ -48,7 +49,7 @@ export async function GET() {
             lieuLivraison: newUser.lieuLivraison,
         },
         process.env.NEXTAUTH_SECRET,
-        { expiresIn: "1h" }
+        { expiresIn: "30d" }
         );
         return NextResponse.json(
         { message: "utilisateur enregistré avec succès", token, user: newUser },
@@ -59,26 +60,26 @@ export async function GET() {
         return NextResponse.json({ error: error }, { status: 500 });
     }
     }
-    export async function PUT(req: Request) {
-    try {
-        const body = await req.json();
-        const session = await getServerSession(authOptions);
-        if (!session || !session.user.email) {
-        return NextResponse.json({ message: "Non autorisé" }, { status: 401 });
-        }
-        await prisma.user.update({
-        where: { email: session.user.email },
-        data: {
-            telephone: body.telephone,
-            lieuLivraison: body.lieu,
-        },
-        });
-        return NextResponse.json(
-        { message: "Mise à jour réussie" },
-        { status: 200 }
-        );
-    } catch (error) {
-        console.error("Erreur PUT /api/client:", error);
-        return NextResponse.json({ error: "Erreur serveur" }, { status: 500 });
-    }
-}
+//     export async function PUT(req: Request) {
+//     try {
+//         const body = await req.json();
+//         const session = await getServerSession(authOptions);
+//         if (!session || !session.user.email) {
+//         return NextResponse.json({ message: "Non autorisé" }, { status: 401 });
+//         }
+//         await prisma.user.update({
+//         where: { email: session.user.email },
+//         data: {
+//             telephone: body.telephone,
+//             lieuLivraison: body.lieu,
+//         },
+//         });
+//         return NextResponse.json(
+//         { message: "Mise à jour réussie" },
+//         { status: 200 }
+//         );
+//     } catch (error) {
+//         console.error("Erreur PUT /api/client:", error);
+//         return NextResponse.json({ error: "Erreur serveur" }, { status: 500 });
+//     }
+// }

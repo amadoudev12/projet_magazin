@@ -27,7 +27,7 @@ export default function LoginPage () {
         
         if (!res.ok) {
             const data = await res.json();
-            console.error("Erreur API:", data);
+            // console.error("Erreur API:", data);
             toast.error('Impossible de créer le compte');
             return;
         }
@@ -44,12 +44,12 @@ export default function LoginPage () {
             // Redirection seulement si pas d'erreur
             router.push('/client/product');
         } else {
-            console.error("Échec de la connexion:", signInResult.error);
+            // console.error("Échec de la connexion:", signInResult.error);
             toast.error('Connexion échouée');
         }
 
     } catch (err) {
-        console.error("Erreur front:", err);
+        // console.error("Erreur front:", err);
         toast.error('Une erreur est survenue');
     }
 }

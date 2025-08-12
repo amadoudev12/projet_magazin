@@ -18,10 +18,10 @@ const BoutiqueProduit = ({ produits }: { produits: product[] }) => {
     const router = useRouter()
 // 10 10 2004 
     useEffect(()=>{
-        console.log(cart)
+        // console.log(cart)
         const somme = cart.reduce((s,c)=> s + c.total, 0)
         setSomme(somme)
-        console.log(somme)
+        // console.log(somme)
     },[cart])
 
     const [viewCart , setViewCart] = useState(false)

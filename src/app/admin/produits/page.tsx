@@ -86,6 +86,21 @@ export default function ProduitPage() {
             setPrice('')
         }
     }
+// pour vider une table 
+    // const TruncateTable = async () =>{
+    //     const res = await fetch('/api/truncate',{
+    //         method:"POST",
+    //         headers : {"Content-Type":"application/json"},
+    //         body : JSON.stringify({items:"user"})
+    //     })
+    //     const data = await res.json()
+    //     if(res.ok){
+    //         toast('table vidée avec succes')
+    //     }
+    //     if(!res.ok){
+    //         console.log(data.message)
+    //     }
+    // }
 
     // Ouvrir le formulaire avec les données du produit à éditer
     const openEditForm = (produit: Produit) => {
@@ -111,6 +126,11 @@ export default function ProduitPage() {
                 <Link className='flex items-center gap-2 text-white font-bold text-[15px] hover:bg-green-500 py-3 px-10 bg-green-800 rounded-2xl' href="productAdd">
                     <span>+</span> <span> Ajouter un Produit</span>
                 </Link>
+                {/* <button
+                    onClick={TruncateTable}
+                    >
+                    Vider la Table
+                </button> */}
             </div>
 
             <div className='flex items-center gap-3 mb-[15px]'>
