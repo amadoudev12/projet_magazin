@@ -38,7 +38,7 @@ export default function CommandePage() {
     },[])
     return (
         <div>
-            <div className="mt-10 flex flex-col justify-center mb-4">
+            <div className="flex flex-col justify-center mb-4">
                 <h1 className="font-bold text-3xl py-2">Gestion des commandes</h1>
                 <p className="text-gray-500">Gérez et suivez toutes les commandes de votre boutique</p>
             </div>
