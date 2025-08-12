@@ -111,7 +111,7 @@ return (
 
         {/* Grille des produits */}
         <div className="max-w-7xl mx-auto">
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+            <div className="grid grid-cols-1  sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
             {produits.map((p) => (
                 <div
                 key={p.id}
@@ -120,7 +120,7 @@ return (
                 <div className="flex-1 flex flex-col justify-center">
                     {p.imageUrl && (
                         <Image
-                        src={p.imageUrl.startsWith("/") ? p.imageUrl : `/uploads/${p.imageUrl}`}
+                        src={p.imageUrl}
                         alt={p.name}
                         width={160} // équivalent à w-40
                         height={160} // équivalent à h-40
